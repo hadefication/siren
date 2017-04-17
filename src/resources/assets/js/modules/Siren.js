@@ -5,13 +5,13 @@ export default class Siren
 {
 
     constructor() {
-        this.default = {
+        this.options = {
             closeButton: true,
             debug: false,
             newestOnTop: true,
             progressBar: true,
             positionClass: "toast-top-right",
-            preventDuplicates: false,
+            preventDuplicates: true,
             onclick: null,
             showDuration: 300,
             hideDuration: 1000,
@@ -24,24 +24,31 @@ export default class Siren
         };
     }
 
+    setDefaults(options = {}) {
+        this.options = merge(this.options, options);
+    }
+
     error(message, title = 'Error', options = {}) {
-        this.__show__('error', options);
+        this.__show__('error', message, title, options);
     }
 
     success(message, title = 'Success', options = {}) {
-        this.__them__('success', options);
+        this.__them__('success', message, title, options);
     }
 
     warning(message, title = 'Warning', options = {}) {
-        this.__them__('warning', options);
+        this.__them__('warning', message, title, options);
     }
 
     info(message, title = 'Info', options = {}) {
-        this.__them__('info', options);
+        this.__them__('info', message, title, options);
     }
 
     __show__(type, message, title = 'Notification', options = {}) {
-        toastr.options = merge(this.defaults, options);
+        toastr.options = merge(this.options, options);
+
+        console.log([type, message, title, options]);
+
         toastr[type](message, title);
     }
 }
