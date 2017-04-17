@@ -81,7 +81,7 @@ class Siren
      * @param   string  $view                               the custom view to render that handles the render of all collected messages
      * @return  string
      */
-    public function render($view)
+    public function render($view = '')
     {
         $messages = collect(session('siren'));
         session()->forget('siren');
