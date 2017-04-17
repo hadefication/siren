@@ -85,6 +85,6 @@ class Siren
     {
         $messages = collect(session('siren'));
         session()->forget('siren');
-        return view((view()->exists($view) ? : $view : 'siren::render'), compact('messages'))->render();
+        return view((view()->exists($view) ? $view : 'siren::render'), compact('messages'))->render();
     }
 }
