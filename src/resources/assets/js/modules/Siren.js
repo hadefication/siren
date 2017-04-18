@@ -33,15 +33,15 @@ export default class Siren
     }
 
     success(message, title = 'Success', options = {}) {
-        this.__them__('success', message, title, options);
+        this.__show__('success', message, title, options);
     }
 
     warning(message, title = 'Warning', options = {}) {
-        this.__them__('warning', message, title, options);
+        this.__show__('warning', message, title, options);
     }
 
     info(message, title = 'Info', options = {}) {
-        this.__them__('info', message, title, options);
+        this.__show__('info', message, title, options);
     }
 
     __show__(type, message, title = 'Notification', options = {}) {
