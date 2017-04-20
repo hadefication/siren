@@ -2,6 +2,8 @@
 
 namespace Hadefication\Siren;
 
+use Hadefication\Siren\Support\SirenBag;
+
 class Siren
 {
     /**
@@ -76,6 +78,16 @@ class Siren
     }
 
     /**
+     * Get all messages
+     *
+     * @return  SirenBag
+     */
+    public function messages()
+    {
+        return new SirenBag(session('siren'));
+    }
+
+    /**
      * Render all collected messages
      *
      * @param   string  $view                               the custom view to render that handles the render of all collected messages
@@ -83,8 +95,17 @@ class Siren
      */
     public function render($view = '')
     {
-        $messages = collect(session('siren'));
+        $this->flush();
+        return view((view()->exists($view) ? $view : 'siren::render'))->render();
+    }
+
+    /**
+     * Flush all messages
+     *
+     * @return  void
+     */
+    public function flush()
+    {
         session()->forget('siren');
-        return view((view()->exists($view) ? $view : 'siren::render'), compact('messages'))->render();
     }
 }

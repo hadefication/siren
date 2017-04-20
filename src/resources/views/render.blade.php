@@ -1,6 +1,6 @@
-@if ($messages->isNotEmpty())
+@if (siren()->messages()->any())
     <script type="text/javascript">
-        @foreach ($messages as $key => $message)
+        @foreach (siren()->messages()->all() as $key => $message)
             siren['{{ $message->type }}']('{{ $message->message }}', '{{ $message->title }}');
         @endforeach
     </script>

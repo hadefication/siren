@@ -3,6 +3,9 @@
 namespace Hadefication\Siren;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
+
+use Hadefication\Siren\Support\SirenBag;
 
 class SirenServiceProvider extends ServiceProvider
 {
