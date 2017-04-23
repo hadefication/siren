@@ -30,5 +30,9 @@ class SirenServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->loadViewsFrom(__DIR__.'/resources/views', 'siren');
+
+        View::composer('*', function ($view) {
+            $view->with('siren', siren()->messages());
+        });
     }
 }

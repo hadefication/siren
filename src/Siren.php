@@ -78,6 +78,19 @@ class Siren
     }
 
     /**
+     * Store an info message
+     *
+     * @param   string  $message                            the message
+     * @param   string  $title                              the title
+     * @param   boolean $important                          flag if the message is important
+     * @return  void
+     */
+    public function notice($message, $title = 'Info', $important = false)
+    {
+        $this->info($message, $title, $important);
+    }
+
+    /**
      * Get all messages
      *
      * @return  SirenBag
@@ -95,7 +108,6 @@ class Siren
      */
     public function render($view = '')
     {
-        $this->flush();
         return view((view()->exists($view) ? $view : 'siren::render'))->render();
     }
 

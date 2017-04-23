@@ -4,7 +4,8 @@ import merge from 'lodash/merge';
 export default class Siren
 {
 
-    constructor() {
+    constructor()
+    {
         this.options = {
             closeButton: true,
             debug: false,
@@ -24,35 +25,102 @@ export default class Siren
         };
     }
 
-    setDefaults(options = {}) {
+    /**
+     * Override settings
+     * @param   {Object} [options={}]                           options to override, see options object
+     * @return  {Void}
+     */
+    setDefaults(options = {})
+    {
         this.options = merge(this.options, options);
     }
 
-    error(message, title = 'Error', options = {}) {
-        this.__show__('error', message, title, options);
+    /**
+     * Show an error message
+     *
+     * @param   {String}  message                               the message to show
+     * @param   {String}  [title='Error']                       the title of the message
+     * @param   {Boolean} [important=false]                     flag if the message is important or not
+     * @param   {Object}  [options={}]                          option overrides
+     * @return  {Void}
+     */
+    error(message, title = 'Error', important = false, options = {}) {
+        this.__show__('error', message, title, important, options);
     }
 
-    success(message, title = 'Success', options = {}) {
-        this.__show__('success', message, title, options);
+    /**
+     * Show an error message
+     *
+     * @param   {String}  message                               the message to show
+     * @param   {String}  [title='Success']                     the title of the message
+     * @param   {Boolean} [important=false]                     flag if the message is important or not
+     * @param   {Object}  [options={}]                          option overrides
+     * @return  {Void}
+     */
+    success(message, title = 'Success', important = false, options = {})
+    {
+        this.__show__('success', message, title, important, options);
     }
 
-    warning(message, title = 'Warning', options = {}) {
-        this.__show__('warning', message, title, options);
+    /**
+     * Show an error message
+     *
+     * @param   {String}  message                               the message to show
+     * @param   {String}  [title='Warning']                     the title of the message
+     * @param   {Boolean} [important=false]                     flag if the message is important or not
+     * @param   {Object}  [options={}]                          option overrides
+     * @return  {Void}
+     */
+    warning(message, title = 'Warning', important = false, options = {})
+    {
+        this.__show__('warning', message, title, important, options);
     }
 
-    info(message, title = 'Info', options = {}) {
-        this.__show__('info', message, title, options);
+    /**
+     * Show an error message
+     *
+     * @param   {String}  message                               the message to show
+     * @param   {String}  [title='Info']                        the title of the message
+     * @param   {Boolean} [important=false]                     flag if the message is important or not
+     * @param   {Object}  [options={}]                          option overrides
+     * @return  {Void}
+     */
+    info(message, title = 'Info', important = false, options = {}) {
+        this.__show__('info', message, title, important, options);
     }
 
-    __show__(type, message, title = 'Notification', options = {}) {
+    /**
+     * Show an error message
+     *
+     * @param   {String}  message                               the message to show
+     * @param   {String}  [title='Notice']                      the title of the message
+     * @param   {Boolean} [important=false]                     flag if the message is important or not
+     * @param   {Object}  [options={}]                          option overrides
+     * @return  {Void}
+     */
+    notice(message, title = 'Notice', important = false, options = {})
+    {
+        this.info(message, title, important, options);
+    }
+
+    /**
+     * Show an error message
+     *
+     * @param   {String} type                                   the type of the message to show
+     * @param   {String}  message                               the message to show
+     * @param   {String}  [title='Error']                       the title of the message
+     * @param   {Boolean} [important=false]                     flag if the message is important or not
+     * @param   {Object}  [options={}]                          option overrides
+     * @return  {Void}
+     */
+    __show__(type, message, title = 'Notification', important = false, options = {})
+    {
         toastr.options = merge(this.options, options);
-
-        console.log([type, message, title, options]);
-
         toastr[type](message, title);
     }
 }
 
-export function siren() {
+export function siren()
+{
     return new Siren();
 }
