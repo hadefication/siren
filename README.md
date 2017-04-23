@@ -21,7 +21,7 @@ Toast style application messages for [Laravel]() using [toastr]().
 ```
 
 ## Usage
-- To collect messages, you can either use the facade `Siren` or the nifty little helper function called `siren()`. This then will give you access to all of the methods that siren can offer. To collect an error message, use `siren()->error($message, $title, $important)` where `$message` will obviously the message you want to convey and same goes to `$title` then `$important` will determine if your message will stay until it's closed (set to `true`) or will auto-close after a number of seconds. See example below for the type message that can be collected.
+- To collect messages, you can either use the facade `Siren` or the nifty little helper function called `siren()`. This then will give you access to all of the methods that siren can offer. To collect an error message, use `siren()->error($message, $title, $important)` where `$message` will obviously the message you want to convey and same goes to `$title` then `$important` will determine if your message will stay until it's closed (set to `true`) or will auto-close after a number of seconds. See example below for the type of message that can be collected using siren.
 
 ```
 // Example
@@ -68,4 +68,47 @@ require('vendor/src/resources/assets/dist/siren.js');
 ```
 
 ## Javascript
-Once you added the siren javascript library, `siren` variable will be available. This will then give you access to all methods that you can use. 
+The companion javascript library uses this cool plugin called [toastr]() to render the toast style message. Once the javascript library is referenced, then you will be able to access `siren` variable, this variable will then give you access to all methods that this library has to offer.
+- `siren.setDefaults(options)` - will let you override the default settings of toastr. `options` param will be the overrides that you want.
+
+```
+// Overridable options
+{
+    closeButton: true,
+    debug: false,
+    newestOnTop: true,
+    progressBar: true,
+    positionClass: "toast-top-right",
+    preventDuplicates: true,
+    showDuration: 300,
+    hideDuration: 1000,
+    timeOut: 5000,
+    extendedTimeOut: 1000,
+    showEasing: "swing",
+    hideEasing: "linear",
+    showMethod: "fadeIn",
+    hideMethod: "fadeOut"
+}
+
+// Example
+// Override close button to be hidden
+siren.setDefaults({
+    closeButton: false,
+})
+```
+- `siren.error(message, title, important, options)` - will show an error toast message. `message` will obviously the message to show and same goes to `title` then `important` will be the flag if you want the message to stay until closed or auto-closed after a period of time and finally the `options` param will give you the "option" to override the defaults of toastr. These will also be the same for other message types. See example below for more details.
+
+```
+// Error
+// Will show close button to the toast message and will show the toast for 10 second
+siren.error('This is a test', 'Error', false, {closeButton: true, timeOut: 10000});
+
+// Success
+siren.success('This is a success message', 'Success');
+
+// Warning
+siren.warning('Warning message here', 'Warning!');
+
+// Notice
+siren.success('A notice message here', 'Notification', true);
+```
